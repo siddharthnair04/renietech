@@ -1,58 +1,44 @@
-import * as React from "react"
+import React, { useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-export function Popular() {
+import '../index.css';
+import {Button} from "./ui/button";
+
+export const Popular = ({ prize }) => {
   return (
-    <Carousel
-      opts={{
-        align: "start",
-      }}
-      className="w-full max-w-xs"
-    >
-      <CarouselContent>
-          <CarouselItem className="lg:basis-1/3 sm:basis-1/3">
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-4">
-                    <img src="src/assets/prize/1.png" alt="" />
-                  <span className="text-xs font-medium">Sun&Sand Sports Gift Card 200 AED</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-          <CarouselItem className="lg:basis-1/3 sm:basis-1/3">
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-4">
-                    <img src="src/assets/prize/2.png" alt="" />
-                  <span className="text-xs font-medium">SEPHORA FAVORITES Lash Drama Set</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-          <CarouselItem className="lg:basis-1/3 sm:basis-1/3">
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-4">
-                    <img src="src/assets/prize/3.png" alt="" />
-                  <span className="text-xs font-medium">Netflix Voucher for 3 months</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
-  );
-};
+    <>
+    <div className="container-sm flex justify-between py-4">
+    <div className='text-left font-semibold text-xl'>Popular prizes</div>
+      <div className='object-right show-all'><Button>Show All</Button></div>
+    </div>
+      <Swiper
+        slidesPerView={3}
+        spaceBetween={30}
+        className="mySwiper"
+      >
+         {prize.map((slide) => (
+        <SwiperSlide key={slide.image}>
+          <img src={slide.image} alt={slide.title}/>
 
-export default Popular
+        </SwiperSlide>
+      ))}
+      </Swiper>
+      <div className="py-2"></div>
+      <div className='bg-gradient-custom-04 items-stretch flex flex-col justify-center px-2 py-2 rounded-xl'>
+        <div className=' justify-between items-stretch flex gap-5 px-0.5'>
+          <div className='flex grow basis-[0%] flex-col items-stretch leading-6' id='some'>
+            <div className='mt-2 px-2 w-[150px] text-center text-blue-500 text-left text-xl font-medium uppercase whitespace-nowrap bg-white justify-center items-stretch leading-6 rounded-sm'>Lets Start</div>
+            <div className='text-white text-left text-md font-medium uppercase whitespace-nowrap leading-4 mt-1.5'> Locate your nearest <br /> Renie Bin!</div>
+            <img src="src/assets/pin.svg" alt="img" className='bin'/>
+          </div>
+        </div>
+      </div>
+    </>
+
+  );
+}
+
+export default Popular;
